@@ -1,13 +1,22 @@
 import { useState } from 'react'
-import './App.css'
+import './Styles/App.css'
+import Especialidades from './Especialidades'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [especialidad, setEspecialidad] = useState("")
 
-  return (
-    <>
-    </>
-  )
+return (
+  <div className="container mt-4">
+    <h1>Gestión de Turnos Médicos</h1>
+
+    <Especialidades
+      especialidadSeleccionada={especialidad}
+      onEspecialidadChange={setEspecialidad}
+    />
+
+    <p>ID seleccionado: {especialidad}</p>
+  </div>
+)
 }
 
 export default App
