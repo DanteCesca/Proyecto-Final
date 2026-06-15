@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './Styles/App.css'
-import Especialidades from './Especialidades'
+import Especialidades from './Componentes/Especialidades'
 
 function App() {
   const [especialidad, setEspecialidad] = useState("")
