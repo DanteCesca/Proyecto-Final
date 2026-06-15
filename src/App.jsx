@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import './Styles/App.css'
 import Especialidades from './Componentes/Especialidades'
+import PacienteInput from './Componentes/Pacientes'
 
 function App() {
   const [especialidad, setEspecialidad] = useState("")
+  const [nombrePaciente, setNombrePaciente] = useState("")
 
 return (
   <div className="container mt-4">
@@ -13,8 +15,13 @@ return (
       especialidadSeleccionada={especialidad}
       onEspecialidadChange={setEspecialidad}
     />
+    <PacienteInput
+     nombre={nombrePaciente}
+     onNombreChange={setNombrePaciente}
+    />
 
-    <p>ID seleccionado: {especialidad}</p>
+    <p>Especialidad: {especialidad}</p>
+    <p>Paciente: {nombrePaciente}</p>
   </div>
 )
 }
