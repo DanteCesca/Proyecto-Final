@@ -1,48 +1,47 @@
 import { useState } from "react";
 
-function DropdownMedicos() {
+function Medicos({ especialidadSeleccionada }) {
   const [medicoSeleccionado, setMedicoSeleccionado] = useState("");
 
   const medicos = [
-    { id: 1, nombre: "Dr. Juan Pérez" },
-    { id: 2, nombre: "Dra. María Gómez" },
-    { id: 3, nombre: "Dr. Carlos López" },
-    { id: 4, nombre: "Dra. Ana Rodríguez" }
+    { id: 1, nombre: "Dr. Juan Pérez", especialidad: 1 },     // Gastro
+    { id: 2, nombre: "Dra. María Gómez", especialidad: 2 },   // Cardio
+    { id: 3, nombre: "Dr. Carlos López", especialidad: 2 },   // Cardio
+    { id: 4, nombre: "Dra. Ana Rodríguez", especialidad: 3 }, // Derma
+    { id: 5, nombre: "Dr. Pedro Ruiz", especialidad: 7 }      // Pediatra
   ];
 
-  const handleChange = (e) => {
-    setMedicoSeleccionado(e.target.value);
-  };
+  const medicosFiltrados = medicos.filter(
+    (m) => m.especialidad === especialidadSeleccionada
+  );
 
   const medico = medicos.find(
     (m) => m.id === Number(medicoSeleccionado)
   );
 
   return (
-    <div className="container mt-4">
-      <div className="mb-3">
-        <label htmlFor="medicos" className="form-label">
-          Seleccione un médico
-        </label>
+    <div className="mb-3">
+      <label htmlFor="medicos" className="form-label">
+        Médico
+      </label>
 
-        <select
-          id="medicos"
-          className="form-select"
-          value={medicoSeleccionado}
-          onChange={handleChange}
-        >
-          <option value="">Medico</option>
+      <select
+        id="medicos"
+        className="form-select"
+        value={medicoSeleccionado}
+        onChange={(e) => setMedicoSeleccionado(e.target.value)}
+      >
+        <option value="">Seleccione un médico</option>
 
-          {medicos.map((medico) => (
-            <option key={medico.id} value={medico.id}>
-              {medico.nombre}
-            </option>
-          ))}
-        </select>
-      </div>
+        {medicosFiltrados.map((medico) => (
+          <option key={medico.id} value={medico.id}>
+            {medico.nombre}
+          </option>
+        ))}
+      </select>
 
       {medico && (
-        <div className="alert alert-info">
+        <div className="alert alert-info mt-3">
           Médico seleccionado: {medico.nombre}
         </div>
       )}
@@ -50,4 +49,4 @@ function DropdownMedicos() {
   );
 }
 
-export default DropdownMedicos;
+export default Medicos;
