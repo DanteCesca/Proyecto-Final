@@ -1,42 +1,17 @@
-import { useState } from "react";
-import "./Styles/App.css"; 
-import Especialidades from "./Componentes/Especialidades";
-import Medicos from "./Componentes/Medicos";
-import PacienteInput from "./Componentes/Pacientes";
-import FechaTurno from "./Componentes/FechaTurno";
+import "./Styles/App.css";
+import Forma from "./Componentes/Form";
 import Tabla from "./Componentes/Tabla";
 
 function App() {
-  const [especialidad, setEspecialidad] = useState("");
-  const [nombrePaciente, setNombrePaciente] = useState("");
-  const [fecha, setFecha] = useState("");
-
   return (
     <div className="container mt-4">
       <h1>Gestión de Turnos Médicos</h1>
 
-      <Especialidades
-        especialidadSeleccionada={especialidad}
-        onEspecialidadChange={setEspecialidad}
-      />
+      <Forma />
 
-      <Medicos
-        especialidadSeleccionada={especialidad}
-      />
-
-      <PacienteInput
-        nombre={nombrePaciente}
-        onNombreChange={setNombrePaciente}
-      />
-
-      <FechaTurno
-        fecha={fecha}
-        onFechaChange={setFecha}
-      />
-      <Tabla/>
+      <Tabla />
     </div>
   );
 }
-
 
 export default App;

@@ -4,11 +4,20 @@ function Medicos({ especialidadSeleccionada }) {
   const [medicoSeleccionado, setMedicoSeleccionado] = useState("");
 
   const medicos = [
-    { id: 1, nombre: "Dr. Juan Pérez", especialidad: 1 },     // Gastro
-    { id: 2, nombre: "Dra. María Gómez", especialidad: 2 },   // Cardio
-    { id: 3, nombre: "Dr. Carlos López", especialidad: 2 },   // Cardio
-    { id: 4, nombre: "Dra. Ana Rodríguez", especialidad: 3 }, // Derma
-    { id: 5, nombre: "Dr. Pedro Ruiz", especialidad: 7 }      // Pediatra
+    { id: 1, nombre: "Dr. Marzelo Aguilar", especialidad: 1 },    //1 Gastro
+    { id: 2, nombre: "Dra. Martina Gomez", especialidad: 1 },     //2 Cardio
+    { id: 3, nombre: "Dr. Eduardo Pino", especialidad: 2 },       //3 Derma
+    { id: 4, nombre: "Dra. Sofia Benitez ", especialidad: 2 },    //4 ClinicaMed
+    { id: 5, nombre: "Dra. Claudia Zamora", especialidad: 3 },    //5 Oftanmolo
+    { id: 6, nombre: "Dr. Lucas Rossi", especialidad: 3 },        //6 Neumonologia
+    { id: 7, nombre: "Dr. Carlos Fuentes", especialidad: 4 },      //7 Pediatria
+    { id: 8, nombre: "Dra. Beatriz Herrera", especialidad: 4 },       
+    { id: 9, nombre: "Dra. Valeria Ortega", especialidad: 5 },       
+    { id: 10, nombre: "Dr. Tomas Mendez", especialidad: 5 },       
+    { id: 11, nombre: "Dr. Alegandro Rios ", especialidad: 6 },       
+    { id: 12, nombre: "Dra. Elena Petterson", especialidad: 6 },       
+    { id: 13, nombre: "Dra. Laura Castro", especialidad: 7 },      
+    { id: 14, nombre: "Dr. Facundo Diaz", especialidad: 7 },       
   ];
 
   const medicosFiltrados = medicos.filter(
