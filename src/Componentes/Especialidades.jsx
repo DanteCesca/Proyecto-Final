@@ -7,7 +7,7 @@ function Especialidades({ especialidadSeleccionada, onEspecialidadChange }) {
     { id: 4, nombre: "Clínica Médica" },
     { id: 5, nombre: "Oftalmología" },
     { id: 6, nombre: "Neumonología" },
-    { id: 7, nombre: "Pediatría" }
+    { id: 7, nombre: "Pediatría" },
   ];
 
   
