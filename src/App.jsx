@@ -4,6 +4,7 @@ import Especialidades from "./Componentes/Especialidades";
 import Medicos from "./Componentes/Medicos";
 import PacienteInput from "./Componentes/Pacientes";
 import FechaTurno from "./Componentes/FechaTurno";
+import Tabla from "./Componentes/Tabla";
 
 function App() {
   const [especialidad, setEspecialidad] = useState("");
@@ -32,6 +33,7 @@ function App() {
         fecha={fecha}
         onFechaChange={setFecha}
       />
+      <Tabla/>
     </div>
   );
 }
