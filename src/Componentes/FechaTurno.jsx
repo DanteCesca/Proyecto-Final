@@ -18,8 +18,10 @@ const FechaTurno = ({ fecha, onFechaChange }) => {
         id="fechaTurno"
         className={"form-control " + (hayError ? "is-invalid" : "")}
         value={fecha}
-        onChange={(e) => onFechaChange(e.target.value)}
-        onBlur={() => setTocado(true)}
+        onChange={(e) => {
+            onFechaChange(e.target.value);
+            setTocado(true);}
+        }
         min={hoy} 
         required
       />

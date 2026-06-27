@@ -1,4 +1,3 @@
-// src/Componentes/Forma.jsx
 import { useState, useEffect } from "react";
 import Especialidades from "./Especialidades";
 import Medicos from "./Medicos";
@@ -6,15 +5,17 @@ import PacienteInput from "./Pacientes";
 import FechaTurno from "./FechaTurno";
 import BotonAgregar from "./BotonAgregar";
 
-function Form({ createData, updateData, dataToEdit, setDataToEdit }) {
+function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
+
   const [especialidad, setEspecialidad] = useState("");
+  const [medico, setMedico] = useState("");
   const [nombrePaciente, setNombrePaciente] = useState("");
   const [fecha, setFecha] = useState("");
 
-    useEffect(() => {
+  useEffect(() => {
     if (dataToEdit) {
-      setNombrePaciente(dataToEdit.nombre);
       setEspecialidad(dataToEdit.especialidad);
+      setNombrePaciente(dataToEdit.nombre);
       setFecha(dataToEdit.fecha);
     } else {
       handleReset();
@@ -23,10 +24,11 @@ function Form({ createData, updateData, dataToEdit, setDataToEdit }) {
 
   const handleReset = () => {
     setEspecialidad("");
+    setMedico("");
     setNombrePaciente("");
     setFecha("");
-    if(setDataToEdit) setDataToEdit(null);
-   };
+    onCancelarEdicion(); 
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +36,7 @@ function Form({ createData, updateData, dataToEdit, setDataToEdit }) {
     const nuevoTurno = {
       nombre: nombrePaciente,
       especialidad: especialidad,
+      medico: medico,
       fecha: fecha,
       id: dataToEdit ? dataToEdit.id : Date.now()
     };
@@ -47,9 +50,9 @@ function Form({ createData, updateData, dataToEdit, setDataToEdit }) {
     handleReset();
   };
 
-
   return (
-     <form className="card p-3 shadow" onSubmit={handleSubmit}>
+    <form className="card p-3 shadow" onSubmit={handleSubmit}>
+
       <Especialidades
         especialidadSeleccionada={especialidad}
         onEspecialidadChange={setEspecialidad}
@@ -57,6 +60,8 @@ function Form({ createData, updateData, dataToEdit, setDataToEdit }) {
 
       <Medicos
         especialidadSeleccionada={especialidad}
+        medicoSelecionado={medico}
+        onMedicoChange={setMedico}
       />
 
       <PacienteInput
@@ -68,9 +73,12 @@ function Form({ createData, updateData, dataToEdit, setDataToEdit }) {
         fecha={fecha}
         onFechaChange={setFecha}
       />
-      
+
       <div className="mt-3">
-        <BotonAgregar isEditing={dataToEdit !== null} />
+        <BotonAgregar
+          isEditing={dataToEdit !== null}
+          onClick={handleSubmit}
+        />
       </div>
 
     </form>
