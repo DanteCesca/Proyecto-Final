@@ -1,30 +1,7 @@
 import React from "react";
+import BotonEditar from "./BotonEditar";
 
-function TablaTurnos() {
-  const turnos = [
-    {
-      id: 1,
-      paciente: "Juan Pérez",
-      medico: "Dr. Eduardo Pino",
-      especialidad: "Cardiología",
-      fecha: "2026/06/25",
-    },
-    {
-      id: 2,
-      paciente: "María López",
-      medico: "Dra. Laura Castro",
-      especialidad: "Pediatría",
-      fecha: "2026/06/27",
-    },
-    {
-      id: 3,
-      paciente: "Pedro Sánchez",
-      medico: "Dr. Lucas Rossi",
-      especialidad: "Dermatología",
-      fecha: "2026/06/30",
-    },
-  ];
-
+function TablaTurnos({ turnos, onEditar, onEliminar }) {
   return (
     <div className="container mt-5">
       <div className="card shadow">
@@ -41,31 +18,28 @@ function TablaTurnos() {
                   <th>Médico</th>
                   <th>Especialidad</th>
                   <th>Fecha del Turno</th>
-                  <th></th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
 
               <tbody>
                 {turnos.map((turno) => (
                   <tr key={turno.id}>
-                    <td>{turno.paciente}</td>
+                    <td>{turno.nombre}</td>
                     <td>{turno.medico}</td>
                     <td>{turno.especialidad}</td>
                     <td>{turno.fecha}</td>
                     <td>
                       <div className="d-flex justify-content-center gap-2">
-                        <button
-                          className="btn btn-warning btn-sm"
-                          onClick={() => {}}
-                        >
-                          <i className="bi bi-gear-fill"></i>
-                        </button>
-
+                        <BotonEditar
+                          turno={turno}
+                          onEditar={onEditar}
+                        />
                         <button
                           className="btn btn-danger btn-sm"
-                          onClick={() => {}}
+                          onClick={() => onEliminar(turno.id)}
                         >
-                          <i className="bi bi-trash-fill"></i>
+                          Eliminar
                         </button>
                       </div>
                     </td>
