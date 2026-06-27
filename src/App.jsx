@@ -1,5 +1,5 @@
 import "./Styles/App.css";
-import Forma from "./Componentes/Form";
+import Form from "./Componentes/Form";
 import Tabla from "./Componentes/Tabla";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className="container mt-4">
       <h1>Gestión de Turnos Médicos</h1>
 
-      <Forma />
+      <Form />
 
       <Tabla />
     </div>
