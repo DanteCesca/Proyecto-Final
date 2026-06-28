@@ -6,7 +6,6 @@ import FechaTurno from "./FechaTurno";
 import BotonAgregar from "./BotonAgregar";
 
 function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
-
   const [especialidad, setEspecialidad] = useState("");
   const [medico, setMedico] = useState("");
   const [nombrePaciente, setNombrePaciente] = useState("");
@@ -28,71 +27,93 @@ function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
     setMedico("");
     setNombrePaciente("");
     setFecha("");
-    onCancelarEdicion(); 
+    onCancelarEdicion();
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-
-  if (
-    especialidad === "" ||
-    medico === "" ||
-    nombrePaciente.trim() === "" ||
-    fecha === ""
-  ) {
-    alert("Debe completar todos los campos.");
-    return;
-  }
-
-  const nuevoTurno = {
-    nombre: nombrePaciente,
-    especialidad,
-    medico,
-    fecha,
-    id: dataToEdit ? dataToEdit.id : Date.now()
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!especialidad || !medico || !nombrePaciente.trim() || !fecha) {
+      alert("Debe completar todos los campos.");
+      return;
+    }
+    const nuevoTurno = {
+      nombre: nombrePaciente,
+      especialidad,
+      medico,
+      fecha,
+      id: dataToEdit ? dataToEdit.id : Date.now()
+    };
+    if (dataToEdit) updateData(nuevoTurno);
+    else createData(nuevoTurno);
+    handleReset();
   };
-
-  if (dataToEdit) {
-    updateData(nuevoTurno);
-  } else {
-    createData(nuevoTurno);
-  }
-
-  handleReset();
-};
 
   return (
-    <form className="card p-3 shadow" onSubmit={handleSubmit}>
+    // MAQUETADO SANATORIO: tarjeta blanca con sombra suave y sin borde
+    <div className="card border-0 shadow-sm mb-4">
 
-      <Especialidades
-        especialidadSeleccionada={especialidad}
-        onEspecialidadChange={setEspecialidad}
-      />
-
-      <Medicos
-        especialidadSeleccionada={especialidad}
-        medicoSeleccionado={medico}
-        onMedicoChange={setMedico}
-      />
-
-      <PacienteInput
-        nombre={nombrePaciente}
-        onNombreChange={setNombrePaciente}
-      />
-
-      <FechaTurno
-        fecha={fecha}
-        onFechaChange={setFecha}
-      />
-
-      <div className="mt-3">
-        <BotonAgregar
-          isEditing={dataToEdit !== null}
-          onClick={handleSubmit}
-        />
+      {/* MAQUETADO SANATORIO: encabezado azul con título del formulario */}
+      <div className="card-header bg-primary text-white py-3">
+        <h5 className="mb-0"> Solicitar Turno Médico</h5>
       </div>
 
-    </form>
+      <div className="card-body p-4">
+        <form onSubmit={handleSubmit}>
+
+          {/* MAQUETADO SANATORIO: fila 1 — Especialidad y Médico en dos columnas */}
+          <div className="row g-3">
+            <div className="col-md-6">
+              <Especialidades
+                especialidadSeleccionada={especialidad}
+                onEspecialidadChange={setEspecialidad}
+              />
+            </div>
+            <div className="col-md-6">
+              <Medicos
+                especialidadSeleccionada={especialidad}
+                medicoSeleccionado={medico}
+                onMedicoChange={setMedico}
+              />
+            </div>
+          </div>
+
+          {/* MAQUETADO SANATORIO: fila 2 — Paciente y Fecha en dos columnas */}
+          <div className="row g-3 mt-1">
+            <div className="col-md-6">
+              <PacienteInput
+                nombre={nombrePaciente}
+                onNombreChange={setNombrePaciente}
+              />
+            </div>
+            <div className="col-md-6">
+              <FechaTurno
+                fecha={fecha}
+                onFechaChange={setFecha}
+              />
+            </div>
+          </div>
+
+          {/* MAQUETADO SANATORIO: fila 3 — botones alineados con flexbox */}
+          <div className="d-flex gap-2 mt-4">
+            <BotonAgregar
+              isEditing={dataToEdit !== null}
+              onClick={handleSubmit}
+            />
+            {/* MAQUETADO SANATORIO: botón cancelar solo visible en modo edición */}
+            {dataToEdit && (
+              <button
+                type="button"
+                className="btn btn-light border w-100"
+                onClick={handleReset}
+              >
+                Cancelar
+              </button>
+            )}
+          </div>
+
+        </form>
+      </div>
+    </div>
   );
 }
 
