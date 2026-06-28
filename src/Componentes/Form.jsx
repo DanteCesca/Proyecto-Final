@@ -49,10 +49,8 @@ function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
   };
 
   return (
-    // MAQUETADO SANATORIO: tarjeta blanca con sombra suave y sin borde
     <div className="card border-0 shadow-sm mb-4">
 
-      {/* MAQUETADO SANATORIO: encabezado azul con título del formulario */}
       <div className="card-header bg-primary text-white py-3">
         <h5 className="mb-0"> Solicitar Turno Médico</h5>
       </div>
@@ -60,7 +58,6 @@ function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
       <div className="card-body p-4">
         <form onSubmit={handleSubmit}>
 
-          {/* MAQUETADO SANATORIO: fila 1 — Especialidad y Médico en dos columnas */}
           <div className="row g-3">
             <div className="col-md-6">
               <Especialidades
@@ -77,7 +74,6 @@ function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
             </div>
           </div>
 
-          {/* MAQUETADO SANATORIO: fila 2 — Paciente y Fecha en dos columnas */}
           <div className="row g-3 mt-1">
             <div className="col-md-6">
               <PacienteInput
@@ -93,13 +89,11 @@ function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
             </div>
           </div>
 
-          {/* MAQUETADO SANATORIO: fila 3 — botones alineados con flexbox */}
           <div className="d-flex gap-2 mt-4">
             <BotonAgregar
               isEditing={dataToEdit !== null}
               onClick={handleSubmit}
             />
-            {/* MAQUETADO SANATORIO: botón cancelar solo visible en modo edición */}
             {dataToEdit && (
               <button
                 type="button"
