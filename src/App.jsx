@@ -1,10 +1,8 @@
 import { useState } from "react";
-import "./Styles/App.css";
 import Form from "./Componentes/Form";
 import TablaTurnos from "./Componentes/Tabla";
 
 function App() {
-
   const [turnos, setTurnos] = useState([]);
   const [dataToEdit, setDataToEdit] = useState(null);
 
@@ -21,31 +19,44 @@ function App() {
     setDataToEdit(null);
   };
 
-  const handleEditar = (turno) => {
-    setDataToEdit(turno);
-  };
-
-  const handleEliminar = (id) => {
-    const filtrados = turnos.filter((t) => t.id !== id);
-    setTurnos(filtrados);
-  };
-
   return (
-    <div className="container mt-4">
-      <h1>Gestión de Turnos Médicos</h1>
+    // MAQUETADO SANATORIO: estructura vertical completa con footer al fondo
+    <div className="d-flex flex-column min-vh-100">
 
-      <Form
-        dataToEdit={dataToEdit}
-        createData={createData}
-        updateData={updateData}
-        onCancelarEdicion={() => setDataToEdit(null)}
-      />
+      {/* Navbar institucional */}
+      <nav className="navbar bg-primary px-4 py-3">
+        <div className="container">
+          <span className="navbar-brand text-white fw-bold fs-4">
+            Clínica Tucumán
+          </span>
+          <span className="text-white-50 small">
+            Portal de Autogestión de Turnos
+          </span>
+        </div>
+      </nav>
 
-      <TablaTurnos
-        turnos={turnos}
-        onEditar={handleEditar}
-        onEliminar={handleEliminar}
-      />
+      {/* Contenido principal — crece para empujar el footer hacia abajo */}
+      <main className="flex-grow-1">
+        <div className="container mt-4" style={{ maxWidth: "960px" }}>
+          <Form
+            dataToEdit={dataToEdit}
+            createData={createData}
+            updateData={updateData}
+            onCancelarEdicion={() => setDataToEdit(null)}
+          />
+          <TablaTurnos
+            turnos={turnos}
+            onEditar={(t) => setDataToEdit(t)}
+            onEliminar={(id) => setTurnos(turnos.filter((t) => t.id !== id))}
+          />
+        </div>
+      </main>
+
+      {/* MAQUETADO SANATORIO: footer institucional */}
+      <footer className="bg-primary text-white text-center py-3 mt-5">
+        <small>©copyright 2026 Hermanos Cesca — Turnero Médico.</small>
+      </footer>
+
     </div>
   );
 }
