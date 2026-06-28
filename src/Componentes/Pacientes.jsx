@@ -4,6 +4,7 @@ const MAX_CARACTERES = 30;
 
 const PacienteInput = ({ nombre, onNombreChange }) => {
   const [tocado, setTocado] = useState(false);
+
   const hayError = tocado && nombre.length === 0;
   const errorMinimo = tocado && nombre.length > 0 && nombre.length < 3;
 
@@ -20,7 +21,11 @@ const PacienteInput = ({ nombre, onNombreChange }) => {
         value={nombre}
         onChange={(e) => {
           onNombreChange(e.target.value);
-          setTocado(true); 
+          if (e.target.value.length > 0) {
+            setTocado(false);
+          } else {
+            setTocado(true);
+          }
         }}
         maxLength={MAX_CARACTERES}
         required
