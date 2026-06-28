@@ -20,10 +20,8 @@ function App() {
   };
 
   return (
-    // MAQUETADO SANATORIO: estructura vertical completa con footer al fondo
     <div className="d-flex flex-column min-vh-100">
 
-      {/* Navbar institucional */}
       <nav className="navbar bg-primary px-4 py-3">
         <div className="container">
           <span className="navbar-brand text-white fw-bold fs-4">
@@ -35,7 +33,6 @@ function App() {
         </div>
       </nav>
 
-      {/* Contenido principal — crece para empujar el footer hacia abajo */}
       <main className="flex-grow-1">
         <div className="container mt-4" style={{ maxWidth: "960px" }}>
           <Form
@@ -52,7 +49,6 @@ function App() {
         </div>
       </main>
 
-      {/* MAQUETADO SANATORIO: footer institucional */}
       <footer className="bg-primary text-white text-center py-3 mt-5">
         <small>©copyright 2026 Hermanos Cesca — Turnero Médico.</small>
       </footer>
