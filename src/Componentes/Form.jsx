@@ -15,6 +15,7 @@ function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
   useEffect(() => {
     if (dataToEdit) {
       setEspecialidad(dataToEdit.especialidad);
+      setMedico(dataToEdit.medico);
       setNombrePaciente(dataToEdit.nombre);
       setFecha(dataToEdit.fecha);
     } else {
@@ -30,25 +31,35 @@ function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
     onCancelarEdicion(); 
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    const nuevoTurno = {
-      nombre: nombrePaciente,
-      especialidad: especialidad,
-      medico: medico,
-      fecha: fecha,
-      id: dataToEdit ? dataToEdit.id : Date.now()
-    };
+  if (
+    especialidad === "" ||
+    medico === "" ||
+    nombrePaciente.trim() === "" ||
+    fecha === ""
+  ) {
+    alert("Debe completar todos los campos.");
+    return;
+  }
 
-    if (dataToEdit) {
-      updateData(nuevoTurno);
-    } else {
-      createData(nuevoTurno);
-    }
-
-    handleReset();
+  const nuevoTurno = {
+    nombre: nombrePaciente,
+    especialidad,
+    medico,
+    fecha,
+    id: dataToEdit ? dataToEdit.id : Date.now()
   };
+
+  if (dataToEdit) {
+    updateData(nuevoTurno);
+  } else {
+    createData(nuevoTurno);
+  }
+
+  handleReset();
+};
 
   return (
     <form className="card p-3 shadow" onSubmit={handleSubmit}>
@@ -60,7 +71,7 @@ function Form({ createData, updateData, dataToEdit, onCancelarEdicion }) {
 
       <Medicos
         especialidadSeleccionada={especialidad}
-        medicoSelecionado={medico}
+        medicoSeleccionado={medico}
         onMedicoChange={setMedico}
       />
 
